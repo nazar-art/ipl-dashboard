@@ -31,6 +31,7 @@ public class TeamController {
             @PageableDefault(size = 4, sort = {"date"}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
         Team team = teamRepository.findByTeamName(teamName);
+        log.debug("teamName search: {} : {}", teamName, team);
         team.setMatches(matchRepository.findLatestMatchesByTeam(teamName, pageable));
         return team;
     }
