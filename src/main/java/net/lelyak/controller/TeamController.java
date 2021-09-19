@@ -30,6 +30,11 @@ public class TeamController {
     private final TeamRepository teamRepository;
     private final MatchRepository matchRepository;
 
+    @GetMapping("team")
+    public List<Team> getAllTeams() {
+        return teamRepository.findAll();
+    }
+
     @GetMapping("team/{teamName}")
     public Team getTeam(
             @PathVariable String teamName,
