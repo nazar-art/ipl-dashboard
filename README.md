@@ -53,5 +53,5 @@ After updating UI part, run
 
     yarn build 
 
-updated resources will be copied to Spring Boot App
+Updated resources will be copied to Spring Boot App. And launched as regular Spring Boot App. 
 
