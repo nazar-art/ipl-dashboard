@@ -18,7 +18,7 @@
     <description>Spring Boot backend project with React UI</description>
 
     <properties>
-        <java.version>15</java.version>
+        <java.version>1.8</java.version>
     </properties>
 
     <dependencies>
@@ -71,11 +71,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
         </dependency>
 
         <!-- TEST -->

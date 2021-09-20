@@ -44,7 +44,7 @@ public class BatchConfig {
                 .name("MatchItemReader")
                 .resource(new ClassPathResource("match-data.csv"))
                 .delimited().names(FIELD_NAMES)
-                .fieldSetMapper(new BeanWrapperFieldSetMapper<>() {
+                .fieldSetMapper(new BeanWrapperFieldSetMapper<MatchInput>() {
                     {
                         setTargetType(MatchInput.class);
                     }
