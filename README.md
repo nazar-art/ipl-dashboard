@@ -48,3 +48,10 @@ Deployed to Heroku:
 
     https://ipl-dashboard-service.herokuapp.com/
 
+---
+After updating UI part, run 
+
+    yarn build 
+
+updated resources will be copied to Spring Boot App
+
