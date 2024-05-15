@@ -5,6 +5,10 @@ Run main App class.
 
 ## React JS on UI
 
+download all needed dependencies:
+
+    npm install
+
 start with:
 
     yarn start
