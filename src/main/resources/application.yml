@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: 'ipl-dashboard'
+  jpa:
+    open-in-view: false

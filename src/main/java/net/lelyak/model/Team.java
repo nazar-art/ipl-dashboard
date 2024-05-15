@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 public class Team implements Serializable {
-
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id

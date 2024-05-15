@@ -27,13 +27,23 @@ import javax.sql.DataSource;
 @EnableBatchProcessing
 @RequiredArgsConstructor
 public class BatchConfig {
+    private static final String DATA_CSV = "match-data-updated.csv";
 
     private final static String[] FIELD_NAMES = new String[]{
-            "id", "city", "date", "player_of_match", "venue",
-            "neutral_venue", "team1", "team2", "toss_winner",
+            "id",
+            "season", "city", "date",
+            "match_type", "player_of_match", "venue",
+            "team1", "team2", "toss_winner",
             "toss_decision", "winner", "result", "result_margin",
-            "eliminator", "method", "umpire1", "umpire2"
+            "target_runs", "target_overs", "super_over",
+            "method", "umpire1", "umpire2"
     };
+    private static final String INSERT_QUERY = """
+            INSERT INTO match (id, season, city, date, player_of_match, venue, team1, team2, toss_winner, toss_decision, match_winner, result, result_margin, umpire1, umpire2)
+            VALUES (:id, :season, :city, :date, :playerOfMatch, :venue, :team1, :team2, :tossWinner, :tossDecision, :matchWinner, :result, :resultMargin, :umpire1, :umpire2)
+            """;
+
+
 
     public final JobBuilderFactory jobBuilderFactory;
     public final StepBuilderFactory stepBuilderFactory;
@@ -42,9 +52,9 @@ public class BatchConfig {
     public FlatFileItemReader<MatchInput> reader() {
         return new FlatFileItemReaderBuilder<MatchInput>()
                 .name("MatchItemReader")
-                .resource(new ClassPathResource("match-data.csv"))
+                .resource(new ClassPathResource(DATA_CSV))
                 .delimited().names(FIELD_NAMES)
-                .fieldSetMapper(new BeanWrapperFieldSetMapper<MatchInput>() {
+                .fieldSetMapper(new BeanWrapperFieldSetMapper<>() {
                     {
                         setTargetType(MatchInput.class);
                     }
@@ -60,8 +70,7 @@ public class BatchConfig {
     public JdbcBatchItemWriter<Match> writer(DataSource dataSource) {
         return new JdbcBatchItemWriterBuilder<Match>()
                 .itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-                .sql("INSERT INTO match (id, city, date, player_of_match, venue, team1, team2, toss_winner, toss_decision, match_winner, result, result_margin, umpire1, umpire2) "
-                        + " VALUES (:id, :city, :date, :playerOfMatch, :venue, :team1, :team2, :tossWinner, :tossDecision, :matchWinner, :result, :resultMargin, :umpire1, :umpire2)")
+                .sql(INSERT_QUERY)
                 .dataSource(dataSource)
                 .build();
     }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -20,10 +21,12 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Match implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     private Long id;
+    private String season;
     private String city;
     private LocalDate date;
     private String playerOfMatch;

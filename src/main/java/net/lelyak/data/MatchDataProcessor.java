@@ -33,6 +33,7 @@ public class MatchDataProcessor implements ItemProcessor<MatchInput, Match> {
                 .venue(input.getVenue())
                 .team2(secondInningsTeam)
                 .result(input.getResult())
+                .season(input.getSeason())
                 .umpire1(input.getUmpire1())
                 .umpire2(input.getUmpire2())
                 .matchWinner(input.getWinner())
