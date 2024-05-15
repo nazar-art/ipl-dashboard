@@ -38,20 +38,20 @@ public class JobCompletionNotificationListener implements JobExecutionListener {
 
             Map<String, Team> teamNameAndTeamMap = new HashMap<>();
 
-            em.createQuery("select m.team1, count(*) from Match m group by m.team1", Object[].class)
+            em.createQuery("SELECT m.team1, count(*) FROM Match m GROUP BY m.team1", Object[].class)
                     .getResultList()
                     .stream()
                     .map(fromDb -> new Team((String) fromDb[0], (long) fromDb[1]))
                     .forEach(team -> teamNameAndTeamMap.put(team.getTeamName(), team));
 
-            em.createQuery("select m.team2, count(*) from Match m group by m.team2", Object[].class)
+            em.createQuery("SELECT m.team2, count(*) FROM Match m GROUP BY m.team2", Object[].class)
                     .getResultList()
                     .forEach(fromDb -> {
                         Team team = teamNameAndTeamMap.get((String) fromDb[0]);
                         team.setTotalMatches(team.getTotalMatches() + (long) fromDb[1]);
                     });
 
-            em.createQuery("select m.matchWinner, count(*) from Match m group by m.matchWinner", Object[].class)
+            em.createQuery("SELECT m.matchWinner, count(*) FROM Match m GROUP BY m.matchWinner", Object[].class)
                     .getResultList()
                     .forEach(fromDb -> {
                         Team team = teamNameAndTeamMap.get((String) fromDb[0]);

@@ -16,10 +16,10 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
 
     List<Match> findAllByTeam1OrTeam2(String teamName1, String teamName2, Pageable pageable);
 
-    @Query("select m from Match m " +
-            "where (m.team1 = :teamName or m.team2 = :teamName) " +
-            "and m.date between :startDate and :endDate " +
-            "order by m.date desc")
+    @Query("SELECT m FROM Match m " +
+            "WHERE (m.team1 = :teamName OR m.team2 = :teamName) " +
+            "AND m.date BETWEEN :startDate AND :endDate " +
+            "ORDER BY m.date DESC")
     List<Match> getAllMatchesByTeamBetweenDates(
             @Param("teamName") String teamName,
             @Param("startDate") LocalDate startDate,
