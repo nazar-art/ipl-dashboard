@@ -1,9 +1,9 @@
 # IPL Dashboard App
-## Backend
+## Backend (Spring Boot)
 
 Run main App class - `DashboardApplication` -> check logs
 
-## UI
+## UI (React)
 
 Navigate to `src/frontend` folder and download all needed dependencies with `npm`:
 
