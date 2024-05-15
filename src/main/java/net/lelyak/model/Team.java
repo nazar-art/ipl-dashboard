@@ -33,7 +33,6 @@ public class Team implements Serializable {
     @Transient
     private List<Match> matches;
 
-
     public Team(String teamName, long totalMatches) {
         this.teamName = teamName;
         this.totalMatches = totalMatches;

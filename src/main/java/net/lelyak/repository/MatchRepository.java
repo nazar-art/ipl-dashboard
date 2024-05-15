@@ -26,7 +26,6 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
             @Param("endDate") LocalDate endDate
     );
 
-
     default List<Match> findLatestMatchesByTeam(String teamName, Pageable pageable) {
         return findAllByTeam1OrTeam2(teamName, teamName, pageable);
     }

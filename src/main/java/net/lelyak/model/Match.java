@@ -20,7 +20,6 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Match implements Serializable {
-
     @Serial
     private static final long serialVersionUID = 1L;
 

@@ -3,6 +3,16 @@
 
 Run main App class - `DashboardApplication` -> check logs
 
+DB tables could be available:
+
+    http://localhost:8080/h2-console
+
+DB Credentials for DB console:
+
+    dbname: ipl_db
+    user: sa
+    pass: 
+
 ## UI (React)
 
 Navigate to `src/frontend` folder and download all needed dependencies with `npm`:

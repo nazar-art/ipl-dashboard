@@ -13,6 +13,7 @@ import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilde
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -25,7 +26,9 @@ import javax.sql.DataSource;
  */
 @Configuration
 public class BatchConfig {
-    private static final String DATA_CSV = "match-data-updated.csv";
+
+    @Value("${csv-dataset}")
+    private String inputFile;
 
     private final static String[] FIELD_NAMES = new String[]{
             "id",
@@ -45,14 +48,12 @@ public class BatchConfig {
     public FlatFileItemReader<MatchInput> reader() {
         return new FlatFileItemReaderBuilder<MatchInput>()
                 .name("MatchItemReader")
-                .resource(new ClassPathResource(DATA_CSV))
+                .resource(new ClassPathResource(inputFile))
                 .delimited()
                 .names(FIELD_NAMES)
-                .fieldSetMapper(new BeanWrapperFieldSetMapper<>() {
-                    {
-                        setTargetType(MatchInput.class);
-                    }
-                }).build();
+                .fieldSetMapper(new BeanWrapperFieldSetMapper<>() {{
+                    setTargetType(MatchInput.class);
+                }}).build();
     }
 
     @Bean
@@ -77,7 +78,7 @@ public class BatchConfig {
     @Bean
     public Step step1(JobRepository jobRepository, PlatformTransactionManager transactionManager, JdbcBatchItemWriter<Match> writer) {
         return new StepBuilder("step1", jobRepository)
-                .<MatchInput, Match> chunk(10, transactionManager)
+                .<MatchInput, Match>chunk(10, transactionManager)
                 .reader(reader())
                 .processor(processor())
                 .writer(writer)
