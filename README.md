@@ -1,17 +1,21 @@
 # IPL Dashboard App
-## Spring Boot on Backend
+## Backend
 
-Run main App class.
+Run main App class - `DashboardApplication` -> check logs
 
-## React JS on UI
+## UI
 
-download all needed dependencies:
+Navigate to `src/frontend` folder and download all needed dependencies with `npm`:
 
     npm install
 
-start with:
+Start UI with `yarn`:
 
     yarn start
+
+From IDE login page should be open:
+
+    http://localhost:3000/
 
 Some URLs for testing
 
@@ -48,7 +52,7 @@ https://www.kaggle.com/patrickb1912/ipl-complete-dataset-20082020/metadata
 
 ---
 
-Deployed to Heroku:
+Deployed to Heroku (dead now):
 
     https://ipl-dashboard-service.herokuapp.com/
 
