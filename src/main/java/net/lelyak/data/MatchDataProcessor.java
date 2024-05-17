@@ -12,37 +12,36 @@ public class MatchDataProcessor implements ItemProcessor<MatchInput, Match> {
     public Match process(final MatchInput input) {
 
         // Set Team 1 and Team 2 depending on the innings order
-        String firstInningsTeam, secondInningsTeam;
+        final String firstInningsTeam, secondInningsTeam;
 
-        if ("bat".equals(input.getToss_decision())) {
-            firstInningsTeam = input.getToss_winner();
-            secondInningsTeam = StringUtils.equals(input.getToss_winner(), input.getTeam1())
-                    ? input.getTeam2()
-                    : input.getTeam1();
-
+        if (StringUtils.equals("bat", input.toss_decision())) {
+            firstInningsTeam = input.toss_winner();
+            secondInningsTeam = StringUtils.equals(input.toss_winner(), input.team1())
+                    ? input.team2()
+                    : input.team1();
         } else {
-            secondInningsTeam = input.getToss_winner();
-            firstInningsTeam = StringUtils.equals(input.getToss_winner(), input.getTeam1())
-                            ? input.getTeam2()
-                            : input.getTeam1();
+            secondInningsTeam = input.toss_winner();
+            firstInningsTeam = StringUtils.equals(input.toss_winner(), input.team1())
+                            ? input.team2()
+                            : input.team1();
         }
 
         return Match.builder()
-                .city(input.getCity())
+                .city(input.city())
                 .team1(firstInningsTeam)
-                .venue(input.getVenue())
+                .venue(input.venue())
                 .team2(secondInningsTeam)
-                .result(input.getResult())
-                .season(input.getSeason())
-                .umpire1(input.getUmpire1())
-                .umpire2(input.getUmpire2())
-                .matchWinner(input.getWinner())
-                .id(Long.parseLong(input.getId()))
-                .tossWinner(input.getToss_winner())
-                .date(LocalDate.parse(input.getDate()))
-                .tossDecision(input.getToss_decision())
-                .resultMargin(input.getResult_margin())
-                .playerOfMatch(input.getPlayer_of_match())
+                .result(input.result())
+                .season(input.season())
+                .umpire1(input.umpire1())
+                .umpire2(input.umpire2())
+                .matchWinner(input.winner())
+                .id(Long.parseLong(input.id()))
+                .tossWinner(input.toss_winner())
+                .date(LocalDate.parse(input.date()))
+                .tossDecision(input.toss_decision())
+                .resultMargin(input.result_margin())
+                .playerOfMatch(input.player_of_match())
                 .build();
     }
 

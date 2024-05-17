@@ -1,37 +1,28 @@
 package net.lelyak.data;
 
-import lombok.Data;
-
 /**
  * @author Nazar Lelyak.
- * updated csv source:
- * id,season,city,date,match_type,player_of_match,
- * venue,team1,team2,
- * toss_winner,toss_decision,winner,result,
- * result_margin,target_runs,target_overs,super_over,
- * method,umpire1,umpire2
  */
-@Data
-public class MatchInput {
-    private String id;
-    private String season;
-    private String city;
-    private String date;
-    private String match_type;
-    private String player_of_match;
-    private String venue;
-    private String team1;
-    private String team2;
-    private String toss_winner;
-    private String toss_decision;
-    private String winner;
-    private String result;
-    private String result_margin;
-    private String target_runs;
-    private String target_overs;
-    private String super_over;
-
-    private String method;
-    private String umpire1;
-    private String umpire2;
+public record MatchInput(
+        String id,
+        String season,
+        String city,
+        String date,
+        String match_type,
+        String player_of_match,
+        String venue,
+        String team1,
+        String team2,
+        String toss_winner,
+        String toss_decision,
+        String winner,
+        String result,
+        String result_margin,
+        String target_runs,
+        String target_overs,
+        String super_over,
+        String method,
+        String umpire1,
+        String umpire2
+) {
 }
