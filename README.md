@@ -15,7 +15,11 @@ DB Credentials for DB console:
 
 ## UI (React)
 
-Navigate to `src/frontend` folder and download all needed dependencies with `npm`:
+Navigate to `src/frontend` folder and download all needed dependencies:
+
+    yarn
+
+or use npm:
 
     npm install
 
