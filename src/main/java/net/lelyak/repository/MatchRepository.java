@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface MatchRepository extends JpaRepository<Match, Long> {
 
-    List<Match> findAllByTeam1OrTeam2(String teamName1, String teamName2, Pageable pageable);
+    List<Match> findAllByTeam1OrTeam2OrderByDateDesc(String teamName1, String teamName2, Pageable pageable);
 
     @Query("SELECT m FROM Match m " +
             "WHERE (m.team1 = :teamName OR m.team2 = :teamName) " +
@@ -27,6 +27,6 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
     );
 
     default List<Match> findLatestMatchesByTeam(String teamName, Pageable pageable) {
-        return findAllByTeam1OrTeam2(teamName, teamName, pageable);
+        return findAllByTeam1OrTeam2OrderByDateDesc(teamName, teamName, pageable);
     }
 }
