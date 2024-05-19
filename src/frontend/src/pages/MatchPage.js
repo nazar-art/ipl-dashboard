@@ -7,7 +7,7 @@ import './MatchPage.scss';
 export const MatchPage = () => {
 
     const [matches, setMatches] = useState([]);
-    const { teamName, year } = useParams();
+    const {teamName, year} = useParams();
 
     useEffect(
         () => {
