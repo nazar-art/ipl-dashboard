@@ -1,0 +1,7 @@
+GET localhost:8080/team
+
+###
+GET localhost:8080/team/Mumbai Indians
+
+###
+GET localhost:8080/team/Mumbai Indians/matches?year=2022

@@ -2,6 +2,8 @@ package net.lelyak.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.lelyak.controller.dto.TeamDTO;
+import net.lelyak.controller.mapper.TeamMapper;
 import net.lelyak.model.Match;
 import net.lelyak.model.Team;
 import net.lelyak.repository.MatchRepository;
@@ -9,11 +11,7 @@ import net.lelyak.repository.TeamRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,6 +27,7 @@ public class TeamController {
 
     private final TeamRepository teamRepository;
     private final MatchRepository matchRepository;
+    private final TeamMapper mapper;
 
     @GetMapping("team")
     public List<Team> getAllTeams() {
@@ -36,14 +35,14 @@ public class TeamController {
     }
 
     @GetMapping("team/{teamName}")
-    public Team getTeam(
+    public TeamDTO getTeam(
             @PathVariable String teamName,
             @PageableDefault(size = 4, sort = {"date"}, direction = Sort.Direction.DESC) Pageable pageable
     ) {
-        Team team = teamRepository.findByTeamName(teamName);
+        var team = teamRepository.findByTeamName(teamName);
         log.debug("teamName search: {} : {}", teamName, team);
-        team.setMatches(matchRepository.findLatestMatchesByTeam(teamName, pageable));
-        return team;
+        var latestMatches = matchRepository.findLatestMatchesByTeam(teamName, pageable);
+        return mapper.toTeamDTO(team, latestMatches);
     }
 
     @GetMapping("team/{teamName}/matches")
