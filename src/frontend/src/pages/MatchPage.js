@@ -1,4 +1,4 @@
-import {React, useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import {MatchDetailCard} from "../components/MatchDetailCard";
 import {YearSelector} from "../components/YearSelector";
 import {useParams} from "react-router-dom";

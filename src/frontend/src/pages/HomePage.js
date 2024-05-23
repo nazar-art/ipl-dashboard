@@ -1,7 +1,6 @@
-import {React, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {TeamTile} from '../components/TeamTile';
 import './HomePage.scss';
-
 
 export const HomePage = () => {
     const [teams, setTeams] = useState([]);
